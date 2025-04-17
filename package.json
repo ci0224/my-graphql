@@ -1,0 +1,25 @@
+{
+  "name": "graphql-server",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/ci0224/my-graphql#readme",
+  "bugs": {
+    "url": "https://github.com/ci0224/my-graphql/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ci0224/my-graphql.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "graphql": "^16.10.0",
+    "graphql-yoga": "^5.13.4"
+  }
+}
