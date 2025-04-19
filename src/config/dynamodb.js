@@ -1,5 +1,11 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
+import {
+  DynamoDBDocumentClient,
+  GetCommand,
+  PutCommand,
+  QueryCommand,
+  ScanCommand
+} from '@aws-sdk/lib-dynamodb';
 
 // Check if required environment variables are present
 if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
@@ -31,10 +37,11 @@ export const dynamoDB = {
   // Get a single item by ID
   async getItem(id) {
     try {
-      const result = await docClient.send({
+      const command = new GetCommand({
         TableName: this.tableName,
         Key: { id },
       });
+      const result = await docClient.send(command);
       return result.Item;
     } catch (error) {
       console.error('Error fetching item from DynamoDB:', error);
@@ -45,10 +52,11 @@ export const dynamoDB = {
   // Put a new item
   async putItem(item) {
     try {
-      await docClient.send({
+      const command = new PutCommand({
         TableName: this.tableName,
         Item: item,
       });
+      await docClient.send(command);
       return item;
     } catch (error) {
       console.error('Error putting item to DynamoDB:', error);
@@ -59,10 +67,11 @@ export const dynamoDB = {
   // Query items
   async query(params) {
     try {
-      const result = await docClient.send({
+      const command = new QueryCommand({
         TableName: this.tableName,
         ...params,
       });
+      const result = await docClient.send(command);
       return result.Items;
     } catch (error) {
       console.error('Error querying DynamoDB:', error);
@@ -73,9 +82,10 @@ export const dynamoDB = {
   // Scan all items
   async scanAll() {
     try {
-      const result = await docClient.send({
+      const command = new ScanCommand({
         TableName: this.tableName,
       });
+      const result = await docClient.send(command);
       return result.Items;
     } catch (error) {
       console.error('Error scanning DynamoDB:', error);
@@ -84,4 +94,4 @@ export const dynamoDB = {
   }
 };
 
-export default dynamoDB; 
+export default dynamoDB;
