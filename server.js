@@ -1,20 +1,21 @@
 import { createServer } from 'node:http'
-import { createYoga } from 'graphql-yoga'
-import { createSchema } from 'graphql-yoga'
+import { createYoga, createSchema } from 'graphql-yoga'
+import { typeDefs } from './src/typeDefs/schema.js'
+import { queries } from './src/resolvers/queries.js'
+import { dynamoDB } from './src/config/dynamodb.js'
+
+const schema = createSchema({
+  typeDefs,
+  resolvers: {
+    Query: queries
+  }
+})
 
 const yoga = createYoga({
-  schema: createSchema({
-    typeDefs: /* GraphQL */ `
-      type Query {
-        hello: String
-      }
-    `,
-    resolvers: {
-      Query: {
-        hello: () => 'Hello from GraphQL Yoga on EC2!',
-      },
-    },
-  }),
+  schema,
+  context: () => ({
+    dynamoDB
+  })
 })
 
 const server = createServer(yoga)
