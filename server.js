@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { createServer } from 'node:http'
 import { createYoga, createSchema } from 'graphql-yoga'
 import { typeDefs } from './src/typeDefs/schema.js'
@@ -20,6 +22,6 @@ const yoga = createYoga({
 
 const server = createServer(yoga)
 server.listen(4000, () => {
-  console.log('🚀 Server is running on http://localhost:443/graphql')
+  console.log('🚀 Server is running on http://localhost:4000/graphql')
 })
 
