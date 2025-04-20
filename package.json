@@ -19,6 +19,9 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.788.0",
+    "@aws-sdk/lib-dynamodb": "^3.789.0",
+    "dotenv": "^16.5.0",
     "graphql": "^16.10.0",
     "graphql-yoga": "^5.13.4"
   }
