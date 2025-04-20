@@ -1,5 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
 import { createServer } from 'node:http'
 import { createYoga, createSchema } from 'graphql-yoga'
 import { typeDefs } from './src/typeDefs/schema.js'
