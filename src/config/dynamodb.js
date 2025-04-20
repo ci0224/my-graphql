@@ -7,18 +7,10 @@ import {
   ScanCommand
 } from '@aws-sdk/lib-dynamodb';
 
-// Check if required environment variables are present
-if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
-  throw new Error('AWS credentials are missing in environment variables');
-}
-
 // Configure the DynamoDB Client
 const client = new DynamoDBClient({
   region: process.env.AWS_REGION || 'us-west-2',
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  },
+  // The credentials will be automatically loaded from ~/.aws/credentials
 });
 
 // Create the DynamoDB Document Client
